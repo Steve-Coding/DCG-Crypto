@@ -1,0 +1,13 @@
+[Desktop Entry]
+Version=1.0
+Name=Daily Crypto Giveaways
+Comment=DailyCrypto P2P Cryptocurrency
+Comment[fr]=DailyCrypto, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=DailyCrypto, eşten eşe kriptografik sanal para birimi
+Exec=dailycrypto-qt %u
+Terminal=false
+Type=Application
+Icon=dailycrypto128
+MimeType=x-scheme-handler/dailycrypto;
+Categories=Office;Finance;
+StartupWMClass=DailyCrypto-qt

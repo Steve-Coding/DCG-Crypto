@@ -1,0 +1,3 @@
+usr/local/bin/blockidcoind usr/bin
+usr/local/bin/blockidcoin-cli usr/bin
+debian/examples/blockidcoin.conf etc/blockidcoin

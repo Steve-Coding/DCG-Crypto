@@ -1,0 +1,6 @@
+usr/local/bin/dailycrypto-qt usr/bin
+share/pixmaps/dailycrypto32.xpm usr/share/pixmaps
+share/pixmaps/dailycrypto16.xpm usr/share/pixmaps
+share/pixmaps/dailycrypto128.png usr/share/pixmaps
+debian/dailycrypto-qt.desktop usr/share/applications
+debian/dailycrypto-qt.protocol usr/share/kde4/services/

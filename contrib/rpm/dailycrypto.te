@@ -1,0 +1,81 @@
+policy_module(dailycrypto, 1.100.1)
+
+########################################
+#
+# Declarations
+#
+
+type dailycrypto_t;
+type dailycrypto_exec_t;
+init_daemon_domain(dailycrypto_t, dailycrypto_exec_t)
+
+permissive dailycrypto_t;
+
+type dailycrypto_initrc_exec_t;
+init_script_file(dailycrypto_initrc_exec_t)
+
+type dailycrypto_conf_t;
+files_type(dailycrypto_conf_t)
+
+type dailycrypto_var_lib_t;
+files_type(dailycrypto_var_lib_t)
+
+type dailycrypto_var_run_t;
+files_type(dailycrypto_var_run_t)
+
+type dailycrypto_port_t;
+corenet_port(dailycrypto_port_t)
+
+########################################
+#
+# dailycrypto local policy
+#
+allow dailycrypto_t self:process { fork };
+
+allow dailycrypto_t self:fifo_file rw_fifo_file_perms;
+allow dailycrypto_t self:unix_stream_socket create_stream_socket_perms;
+
+manage_dirs_pattern(dailycrypto_t, dailycrypto_conf_t, dailycrypto_conf_t)
+manage_files_pattern(dailycrypto_t, dailycrypto_conf_t, dailycrypto_conf_t)
+
+manage_dirs_pattern(dailycrypto_t, dailycrypto_var_lib_t, dailycrypto_var_lib_t)
+manage_files_pattern(dailycrypto_t, dailycrypto_var_lib_t, dailycrypto_var_lib_t)
+files_var_lib_filetrans(dailycrypto_t, dailycrypto_var_lib_t, { dir file })
+
+manage_dirs_pattern(dailycrypto_t, dailycrypto_var_run_t, dailycrypto_var_run_t)
+manage_files_pattern(dailycrypto_t, dailycrypto_var_run_t, dailycrypto_var_run_t)
+
+sysnet_dns_name_resolve(dailycrypto_t)
+corenet_all_recvfrom_unlabeled(dailycrypto_t)
+
+allow dailycrypto_t self:tcp_socket create_stream_socket_perms;
+corenet_tcp_sendrecv_generic_if(dailycrypto_t)
+corenet_tcp_sendrecv_generic_node(dailycrypto_t)
+corenet_tcp_sendrecv_all_ports(dailycrypto_t)
+corenet_tcp_bind_generic_node(dailycrypto_t)
+
+gen_require(`
+    type dailycrypto_port_t;
+')
+allow dailycrypto_t dailycrypto_port_t:tcp_socket name_bind;
+
+gen_require(`
+    type dailycrypto_port_t;
+')
+allow dailycrypto_t dailycrypto_port_t:tcp_socket name_connect;
+
+domain_use_interactive_fds(dailycrypto_t)
+
+files_read_etc_files(dailycrypto_t)
+
+miscfiles_read_localization(dailycrypto_t)
+
+sysnet_dns_name_resolve(dailycrypto_t)
+
+allow dailycrypto_t dailycrypto_exec_t:file execute_no_trans;
+allow dailycrypto_t self:process setsched;
+corecmd_exec_ls(dailycrypto_t)
+corenet_tcp_connect_http_port(dailycrypto_t)
+dev_read_urand(dailycrypto_t)
+fs_getattr_xattr_fs(dailycrypto_t)
+kernel_read_system_state(dailycrypto_t)
