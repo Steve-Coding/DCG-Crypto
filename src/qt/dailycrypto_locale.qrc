@@ -1,0 +1,37 @@
+<!DOCTYPE RCC><RCC version="1.0">
+    <qresource prefix="/translations">
+        <file alias="bg">locale/dailycrypto_bg.qm</file>
+        <file alias="ca">locale/dailycrypto_ca.qm</file>
+        <file alias="cs">locale/dailycrypto_cs.qm</file>
+        <file alias="da">locale/dailycrypto_da.qm</file>
+        <file alias="de">locale/dailycrypto_de.qm</file>
+        <file alias="en">locale/dailycrypto_en.qm</file>
+        <file alias="en_GB">locale/dailycrypto_en_GB.qm</file>
+        <file alias="en_US">locale/dailycrypto_en_US.qm</file>
+        <file alias="eo">locale/dailycrypto_eo.qm</file>
+        <file alias="es">locale/dailycrypto_es.qm</file>
+        <file alias="es_ES">locale/dailycrypto_es_ES.qm</file>
+        <file alias="fi">locale/dailycrypto_fi.qm</file>
+        <file alias="fr_FR">locale/dailycrypto_fr_FR.qm</file>
+        <file alias="hi_IN">locale/dailycrypto_hi_IN.qm</file>
+        <file alias="hr">locale/dailycrypto_hr.qm</file>
+        <file alias="hr_HR">locale/dailycrypto_hr_HR.qm</file>
+        <file alias="it">locale/dailycrypto_it.qm</file>
+        <file alias="ja">locale/dailycrypto_ja.qm</file>
+        <file alias="ko_KR">locale/dailycrypto_ko_KR.qm</file>
+        <file alias="lt_LT">locale/dailycrypto_lt_LT.qm</file>
+        <file alias="nl">locale/dailycrypto_nl.qm</file>
+        <file alias="pl">locale/dailycrypto_pl.qm</file>
+        <file alias="pt">locale/dailycrypto_pt.qm</file>
+        <file alias="pt_BR">locale/dailycrypto_pt_BR.qm</file>
+        <file alias="ro_RO">locale/dailycrypto_ro_RO.qm</file>
+        <file alias="ru">locale/dailycrypto_ru.qm</file>
+        <file alias="sk">locale/dailycrypto_sk.qm</file>
+        <file alias="sv">locale/dailycrypto_sv.qm</file>
+        <file alias="tr">locale/dailycrypto_tr.qm</file>
+        <file alias="uk">locale/dailycrypto_uk.qm</file>
+        <file alias="vi">locale/dailycrypto_vi.qm</file>
+        <file alias="zh_CN">locale/dailycrypto_zh_CN.qm</file>
+        <file alias="zh_TW">locale/dailycrypto_zh_TW.qm</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,862 @@
+# Copyright (c) 2013-2016 The Bitcoin Core developers
+# Distributed under the MIT software license, see the accompanying
+# file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+bin_PROGRAMS += qt/dailycrypto-qt
+EXTRA_LIBRARIES += qt/libbitcoinqt.a
+
+# dailycrypto qt core #
+QT_TS = \
+  qt/locale/dailycrypto_bg.ts \
+  qt/locale/dailycrypto_ca.ts \
+  qt/locale/dailycrypto_cs.ts \
+  qt/locale/dailycrypto_da.ts \
+  qt/locale/dailycrypto_de.ts \
+  qt/locale/dailycrypto_en.ts \
+  qt/locale/dailycrypto_en_GB.ts \
+  qt/locale/dailycrypto_en_US.ts \
+  qt/locale/dailycrypto_eo.ts \
+  qt/locale/dailycrypto_es.ts \
+  qt/locale/dailycrypto_es_ES.ts \
+  qt/locale/dailycrypto_fi.ts \
+  qt/locale/dailycrypto_fr_FR.ts \
+  qt/locale/dailycrypto_hi_IN.ts \
+  qt/locale/dailycrypto_hr.ts \
+  qt/locale/dailycrypto_hr_HR.ts \
+  qt/locale/dailycrypto_it.ts \
+  qt/locale/dailycrypto_ja.ts \
+  qt/locale/dailycrypto_ko_KR.ts \
+  qt/locale/dailycrypto_lt_LT.ts \
+  qt/locale/dailycrypto_nl.ts \
+  qt/locale/dailycrypto_pl.ts \
+  qt/locale/dailycrypto_pt.ts \
+  qt/locale/dailycrypto_pt_BR.ts \
+  qt/locale/dailycrypto_ro_RO.ts \
+  qt/locale/dailycrypto_ru.ts \
+  qt/locale/dailycrypto_sk.ts \
+  qt/locale/dailycrypto_sv.ts \
+  qt/locale/dailycrypto_tr.ts \
+  qt/locale/dailycrypto_uk.ts \
+  qt/locale/dailycrypto_vi.ts \
+  qt/locale/dailycrypto_zh_CN.ts \
+  qt/locale/dailycrypto_zh_TW.ts
+
+QT_FORMS_UI = \
+  qt/forms/addressbookpage.ui \
+  qt/forms/askpassphrasedialog.ui \
+  qt/forms/coincontroldialog.ui \
+  qt/forms/blockexplorer.ui \
+  qt/forms/editaddressdialog.ui \
+  qt/forms/governancepage.ui \
+  qt/forms/helpmessagedialog.ui \
+  qt/forms/intro.ui \
+  qt/forms/openuridialog.ui \
+  qt/forms/optionsdialog.ui \
+  qt/forms/rpcconsole.ui \
+  qt/dailycrypto/forms/loadingdialog.ui \
+  qt/forms/zpivcontroldialog.ui \
+  qt/dailycrypto/forms/snackbar.ui \
+  qt/dailycrypto/forms/navmenuwidget.ui \
+  qt/dailycrypto/forms/lockunlock.ui \
+  qt/dailycrypto/forms/expandablebutton.ui \
+  qt/dailycrypto/forms/receivedialog.ui \
+  qt/dailycrypto/forms/walletpassworddialog.ui \
+  qt/dailycrypto/forms/topbar.ui \
+  qt/dailycrypto/forms/txrow.ui \
+  qt/dailycrypto/forms/dashboardwidget.ui \
+  qt/dailycrypto/forms/coincontrolpivwidget.ui \
+  qt/dailycrypto/forms/addresslabelrow.ui \
+  qt/dailycrypto/forms/contactdropdownrow.ui \
+  qt/dailycrypto/forms/mninfodialog.ui \
+  qt/dailycrypto/forms/optionbutton.ui \
+  qt/dailycrypto/forms/masternodewizarddialog.ui \
+  qt/dailycrypto/forms/mnrow.ui \
+  qt/dailycrypto/forms/masternodeswidget.ui \
+  qt/dailycrypto/forms/myaddressrow.ui \
+  qt/dailycrypto/forms/csrow.ui \
+  qt/dailycrypto/forms/sendchangeaddressdialog.ui \
+  qt/dailycrypto/forms/sendconfirmdialog.ui \
+  qt/dailycrypto/forms/sendcustomfeedialog.ui \
+  qt/dailycrypto/forms/sendchangeaddressdialog.ui \
+  qt/dailycrypto/forms/sendmultirow.ui \
+  qt/dailycrypto/forms/send.ui \
+  qt/dailycrypto/forms/addnewaddressdialog.ui \
+  qt/dailycrypto/forms/addnewcontactdialog.ui \
+  qt/dailycrypto/forms/requestdialog.ui \
+  qt/dailycrypto/forms/receivewidget.ui \
+  qt/dailycrypto/forms/tooltipmenu.ui \
+  qt/dailycrypto/forms/addresseswidget.ui \
+  qt/dailycrypto/forms/defaultdialog.ui \
+  qt/dailycrypto/forms/denomgenerationdialog.ui \
+  qt/dailycrypto/forms/privacywidget.ui \
+  qt/dailycrypto/forms/coldstakingwidget.ui \
+  qt/dailycrypto/settings/forms/settingsbackupwallet.ui \
+  qt/dailycrypto/settings/forms/settingsbittoolwidget.ui \
+  qt/dailycrypto/settings/forms/settingsconsolewidget.ui \
+  qt/dailycrypto/settings/forms/settingsdisplayoptionswidget.ui \
+  qt/dailycrypto/settings/forms/settingsfaqwidget.ui \
+  qt/dailycrypto/settings/forms/settingsinformationwidget.ui \
+  qt/dailycrypto/settings/forms/settingsmainoptionswidget.ui \
+  qt/dailycrypto/settings/forms/settingsmultisenddialog.ui \
+  qt/dailycrypto/settings/forms/settingsmultisendwidget.ui \
+  qt/dailycrypto/settings/forms/settingssignmessagewidgets.ui \
+  qt/dailycrypto/settings/forms/settingswalletoptionswidget.ui \
+  qt/dailycrypto/settings/forms/settingswalletrepairwidget.ui \
+  qt/dailycrypto/settings/forms/settingswidget.ui \
+  qt/dailycrypto/forms/welcomecontentwidget.ui \
+  qt/dailycrypto/forms/splash.ui
+
+QT_MOC_CPP = \
+  qt/moc_addressbookpage.cpp \
+  qt/moc_addresstablemodel.cpp \
+  qt/moc_askpassphrasedialog.cpp \
+  qt/moc_bantablemodel.cpp \
+  qt/moc_bitcoinaddressvalidator.cpp \
+  qt/moc_bitcoinamountfield.cpp \
+  qt/dailycrypto/moc_dailycryptogui.cpp \
+  qt/moc_bitcoinunits.cpp \
+  qt/moc_blockexplorer.cpp \
+  qt/moc_clientmodel.cpp \
+  qt/moc_coincontroldialog.cpp \
+  qt/moc_coincontroltreewidget.cpp \
+  qt/moc_csvmodelwriter.cpp \
+  qt/moc_editaddressdialog.cpp \
+  qt/moc_governancepage.cpp \
+  qt/moc_guiutil.cpp \
+  qt/moc_intro.cpp \
+  qt/moc_macdockiconhandler.cpp \
+  qt/moc_macnotificationhandler.cpp \
+  qt/moc_notificator.cpp \
+  qt/moc_openuridialog.cpp \
+  qt/moc_optionsdialog.cpp \
+  qt/moc_optionsmodel.cpp \
+  qt/moc_peertablemodel.cpp \
+  qt/moc_paymentserver.cpp \
+  qt/moc_qvalidatedlineedit.cpp \
+  qt/moc_qvaluecombobox.cpp \
+  qt/moc_proposalframe.cpp \
+  qt/moc_recentrequeststablemodel.cpp \
+  qt/moc_rpcconsole.cpp \
+  qt/moc_splashscreen.cpp \
+  qt/moc_trafficgraphwidget.cpp \
+  qt/moc_transactiondesc.cpp \
+  qt/moc_transactionfilterproxy.cpp \
+  qt/moc_transactiontablemodel.cpp \
+  qt/moc_utilitydialog.cpp \
+  qt/moc_walletmodel.cpp \
+  qt/dailycrypto/moc_loadingdialog.cpp \
+  qt/moc_zpivcontroldialog.cpp \
+  qt/dailycrypto/moc_pwidget.cpp \
+  qt/dailycrypto/moc_snackbar.cpp \
+  qt/dailycrypto/moc_navmenuwidget.cpp \
+  qt/dailycrypto/moc_lockunlock.cpp \
+  qt/dailycrypto/moc_expandablebutton.cpp \
+  qt/dailycrypto/moc_furabstractlistitemdelegate.cpp \
+  qt/dailycrypto/moc_receivedialog.cpp \
+  qt/dailycrypto/moc_walletpassworddialog.cpp \
+  qt/dailycrypto/moc_pfborderimage.cpp \
+  qt/dailycrypto/moc_topbar.cpp \
+  qt/dailycrypto/moc_txrow.cpp \
+  qt/dailycrypto/moc_dashboardwidget.cpp \
+  qt/dailycrypto/moc_coincontrolpivwidget.cpp \
+  qt/dailycrypto/moc_addresslabelrow.cpp \
+  qt/dailycrypto/moc_contactdropdownrow.cpp \
+  qt/dailycrypto/moc_mninfodialog.cpp \
+  qt/dailycrypto/moc_optionbutton.cpp \
+  qt/dailycrypto/moc_coldstakingmodel.cpp \
+  qt/dailycrypto/moc_mnmodel.cpp \
+  qt/dailycrypto/moc_masternodewizarddialog.cpp \
+  qt/dailycrypto/moc_mnrow.cpp \
+  qt/dailycrypto/moc_masternodeswidget.cpp \
+  qt/dailycrypto/moc_myaddressrow.cpp \
+  qt/dailycrypto/moc_csrow.cpp \
+  qt/dailycrypto/moc_contactsdropdown.cpp \
+  qt/dailycrypto/moc_sendchangeaddressdialog.cpp \
+  qt/dailycrypto/moc_sendconfirmdialog.cpp \
+  qt/dailycrypto/moc_sendcustomfeedialog.cpp \
+  qt/dailycrypto/moc_sendchangeaddressdialog.cpp \
+  qt/dailycrypto/moc_sendmultirow.cpp \
+  qt/dailycrypto/moc_send.cpp \
+  qt/dailycrypto/moc_addnewaddressdialog.cpp \
+  qt/dailycrypto/moc_addnewcontactdialog.cpp \
+  qt/dailycrypto/moc_requestdialog.cpp \
+  qt/dailycrypto/moc_receivewidget.cpp \
+  qt/dailycrypto/moc_tooltipmenu.cpp \
+  qt/dailycrypto/moc_addresseswidget.cpp \
+  qt/dailycrypto/moc_defaultdialog.cpp \
+  qt/dailycrypto/moc_denomgenerationdialog.cpp \
+  qt/dailycrypto/moc_privacywidget.cpp \
+  qt/dailycrypto/moc_coldstakingwidget.cpp \
+  qt/dailycrypto/settings/moc_settingsbackupwallet.cpp \
+  qt/dailycrypto/settings/moc_settingsbittoolwidget.cpp \
+  qt/dailycrypto/settings/moc_settingsconsolewidget.cpp \
+  qt/dailycrypto/settings/moc_settingsdisplayoptionswidget.cpp \
+  qt/dailycrypto/settings/moc_settingsfaqwidget.cpp \
+  qt/dailycrypto/settings/moc_settingsinformationwidget.cpp \
+  qt/dailycrypto/settings/moc_settingsmainoptionswidget.cpp \
+  qt/dailycrypto/settings/moc_settingsmultisenddialog.cpp \
+  qt/dailycrypto/settings/moc_settingsmultisendwidget.cpp \
+  qt/dailycrypto/settings/moc_settingssignmessagewidgets.cpp \
+  qt/dailycrypto/settings/moc_settingswalletoptionswidget.cpp \
+  qt/dailycrypto/settings/moc_settingswalletrepairwidget.cpp \
+  qt/dailycrypto/settings/moc_settingswidget.cpp \
+  qt/dailycrypto/moc_welcomecontentwidget.cpp \
+  qt/dailycrypto/moc_splash.cpp
+
+BITCOIN_MM = \
+  qt/macdockiconhandler.mm \
+  qt/macnotificationhandler.mm
+
+QT_MOC = \
+  qt/dailycrypto.moc \
+  qt/bitcoinamountfield.moc \
+  qt/intro.moc \
+  qt/rpcconsole.moc \
+  qt/dailycrypto/settings/moc_settingsconsolewidget.cpp
+
+QT_QRC_CPP = qt/qrc_dailycrypto.cpp
+QT_QRC = qt/dailycrypto.qrc
+QT_QRC_LOCALE_CPP = qt/qrc_dailycrypto_locale.cpp
+QT_QRC_LOCALE = qt/dailycrypto_locale.qrc
+
+PROTOBUF_CC = qt/paymentrequest.pb.cc
+PROTOBUF_H = qt/paymentrequest.pb.h
+PROTOBUF_PROTO = qt/paymentrequest.proto
+
+BITCOIN_QT_H = \
+  qt/addressbookpage.h \
+  qt/addresstablemodel.h \
+  qt/askpassphrasedialog.h \
+  qt/bantablemodel.h \
+  qt/bitcoinaddressvalidator.h \
+  qt/bitcoinamountfield.h \
+  qt/dailycrypto/dailycryptogui.h \
+  qt/bitcoinunits.h \
+  qt/blockexplorer.h \
+  qt/clientmodel.h \
+  qt/coincontroldialog.h \
+  qt/coincontroltreewidget.h \
+  qt/csvmodelwriter.h \
+  qt/editaddressdialog.h \
+  qt/governancepage.h \
+  qt/guiconstants.h \
+  qt/guiutil.h \
+  qt/intro.h \
+  qt/macdockiconhandler.h \
+  qt/macnotificationhandler.h \
+  qt/networkstyle.h \
+  qt/notificator.h \
+  qt/openuridialog.h \
+  qt/optionsdialog.h \
+  qt/optionsmodel.h \
+  qt/paymentrequestplus.h \
+  qt/paymentserver.h \
+  qt/peertablemodel.h \
+  qt/platformstyle.h \
+  qt/proposalframe.h \
+  qt/qvalidatedlineedit.h \
+  qt/qvaluecombobox.h \
+  qt/recentrequeststablemodel.h \
+  qt/rpcconsole.h \
+  qt/splashscreen.h \
+  qt/trafficgraphwidget.h \
+  qt/transactiondesc.h \
+  qt/transactionfilterproxy.h \
+  qt/transactionrecord.h \
+  qt/transactiontablemodel.h \
+  qt/utilitydialog.h \
+  qt/walletmodel.h \
+  qt/walletmodeltransaction.h \
+  qt/dailycrypto/prunnable.h \
+  qt/dailycrypto/pfborderimage.h \
+  qt/dailycrypto/loadingdialog.h \
+  qt/winshutdownmonitor.h \
+  qt/zpivcontroldialog.h \
+  qt/dailycrypto/pwidget.h \
+  qt/dailycrypto/guitransactionsutils.h \
+  qt/dailycrypto/snackbar.h \
+  qt/dailycrypto/navmenuwidget.h \
+  qt/dailycrypto/lockunlock.h \
+  qt/dailycrypto/receivedialog.h \
+  qt/dailycrypto/furlistrow.h \
+  qt/dailycrypto/furabstractlistitemdelegate.h \
+  qt/dailycrypto/txviewholder.h \
+  qt/dailycrypto/qtutils.h \
+  qt/dailycrypto/expandablebutton.h \
+  qt/dailycrypto/walletpassworddialog.h \
+  qt/dailycrypto/topbar.h \
+  qt/dailycrypto/txrow.h \
+  qt/dailycrypto/addressholder.h \
+  qt/dailycrypto/addressfilterproxymodel.h \
+  qt/dailycrypto/dashboardwidget.h \
+  qt/dailycrypto/coincontrolpivwidget.h \
+  qt/dailycrypto/addresslabelrow.h \
+  qt/dailycrypto/contactdropdownrow.h \
+  qt/dailycrypto/mninfodialog.h \
+  qt/dailycrypto/optionbutton.h \
+  qt/dailycrypto/coldstakingmodel.h \
+  qt/dailycrypto/mnmodel.h \
+  qt/dailycrypto/masternodewizarddialog.h \
+  qt/dailycrypto/mnrow.h \
+  qt/dailycrypto/masternodeswidget.h \
+  qt/dailycrypto/myaddressrow.h \
+  qt/dailycrypto/csrow.h \
+  qt/dailycrypto/contactsdropdown.h \
+  qt/dailycrypto/sendchangeaddressdialog.h \
+  qt/dailycrypto/sendconfirmdialog.h \
+  qt/dailycrypto/sendcustomfeedialog.h \
+  qt/dailycrypto/sendchangeaddressdialog.h \
+  qt/dailycrypto/sendmultirow.h \
+  qt/dailycrypto/send.h \
+  qt/dailycrypto/addnewaddressdialog.h \
+  qt/dailycrypto/addnewcontactdialog.h \
+  qt/dailycrypto/requestdialog.h \
+  qt/dailycrypto/receivewidget.h \
+  qt/dailycrypto/tooltipmenu.h \
+  qt/dailycrypto/addresseswidget.h \
+  qt/dailycrypto/defaultdialog.h \
+  qt/dailycrypto/denomgenerationdialog.h \
+  qt/dailycrypto/privacywidget.h \
+  qt/dailycrypto/coldstakingwidget.h \
+  qt/dailycrypto/settings/settingsbackupwallet.h \
+  qt/dailycrypto/settings/settingsbittoolwidget.h \
+  qt/dailycrypto/settings/settingsconsolewidget.h \
+  qt/dailycrypto/settings/settingsdisplayoptionswidget.h \
+  qt/dailycrypto/settings/settingsfaqwidget.h \
+  qt/dailycrypto/settings/settingsinformationwidget.h \
+  qt/dailycrypto/settings/settingsmainoptionswidget.h \
+  qt/dailycrypto/settings/settingsmultisenddialog.h \
+  qt/dailycrypto/settings/settingsmultisendwidget.h \
+  qt/dailycrypto/settings/settingssignmessagewidgets.h \
+  qt/dailycrypto/settings/settingswalletoptionswidget.h \
+  qt/dailycrypto/settings/settingswalletrepairwidget.h \
+  qt/dailycrypto/settings/settingswidget.h \
+  qt/dailycrypto/welcomecontentwidget.h \
+  qt/dailycrypto/splash.h
+
+RES_ICONS = \
+  qt/res/icons/add.png \
+  qt/res/icons/address-book.png \
+  qt/res/icons/automint_active.png \
+  qt/res/icons/automint_inactive.png \
+  qt/res/icons/bitcoin.ico \
+  qt/res/icons/bitcoin.png \
+  qt/res/icons/bitcoin_testnet.ico \
+  qt/res/icons/bitcoin_testnet.png \
+  qt/res/icons/bitcoin_regtest.png \
+  qt/res/icons/browse.png \
+  qt/res/icons/clock1.png \
+  qt/res/icons/clock2.png \
+  qt/res/icons/clock3.png \
+  qt/res/icons/clock4.png \
+  qt/res/icons/clock5.png \
+  qt/res/icons/configure.png \
+  qt/res/icons/connect0_16.png \
+  qt/res/icons/connect1_16.png \
+  qt/res/icons/connect2_16.png \
+  qt/res/icons/connect3_16.png \
+  qt/res/icons/connect4_16.png \
+  qt/res/icons/debugwindow.png \
+  qt/res/icons/edit.png \
+  qt/res/icons/editcopy.png \
+  qt/res/icons/editpaste.png \
+  qt/res/icons/explorer.png \
+  qt/res/icons/export.png \
+  qt/res/icons/eye.png \
+  qt/res/icons/eye_minus.png \
+  qt/res/icons/eye_plus.png \
+  qt/res/icons/filesave.png \
+  qt/res/icons/history.png \
+  qt/res/icons/key.png \
+  qt/res/icons/lock_closed.png \
+  qt/res/icons/lock_open.png \
+  qt/res/icons/masternodes.png \
+  qt/res/icons/onion.png \
+  qt/res/icons/overview.png \
+  qt/res/icons/qrcode.png \
+  qt/res/icons/quit.png \
+  qt/res/icons/receive.png \
+  qt/res/icons/receive_dark.png \
+  qt/res/icons/privacy.png \
+  qt/res/icons/remove.png \
+  qt/res/icons/send.png \
+  qt/res/icons/send_dark.png \
+  qt/res/icons/governance.png \
+  qt/res/icons/governance_dark.png \
+  qt/res/icons/staking_active.png \
+  qt/res/icons/staking_inactive.png \
+  qt/res/icons/synced.png \
+  qt/res/icons/trade.png \
+  qt/res/icons/transaction0.png \
+  qt/res/icons/transaction2.png \
+  qt/res/icons/transaction_conflicted.png \
+  qt/res/icons/tx_inout.png \
+  qt/res/icons/tx_input.png \
+  qt/res/icons/tx_output.png \
+  qt/res/icons/tx_mined.png \
+  qt/res/icons/ic-transaction-received.svg \
+  qt/res/icons/ic-transaction-mint.svg \
+  qt/res/icons/ic-transaction-sent.svg \
+  qt/res/icons/ic-transaction-staked.svg \
+  qt/res/icons/unit_dailycrypto.png \
+  qt/res/icons/unit_mdailycrypto.png \
+  qt/res/icons/unit_udailycrypto.png \
+  qt/res/icons/unit_tdailycrypto.png \
+  qt/res/icons/unit_tmdailycrypto.png \
+  qt/res/icons/unit_tudailycrypto.png \
+  qt/res/icons/yesvote.png \
+  qt/res/icons/novote.png \
+  qt/res/icons/abstainvote.png \
+  qt/res/icons/hd_disabled.png \
+  qt/res/icons/hd_enabled.png \
+  qt/dailycrypto/res/img/bg-dashboard-banner.png \
+  qt/dailycrypto/res/img/bg-multi-number-dark.svg \
+  qt/dailycrypto/res/img/ic-check-locked.svg \
+  qt/dailycrypto/res/img/ic-nav-address.svg \
+  qt/dailycrypto/res/img/ic-update.svg \
+  qt/dailycrypto/res/img/bg-multi-number.svg \
+  qt/dailycrypto/res/img/ic-check-mint-off.svg \
+  qt/dailycrypto/res/img/ic-nav-cold-staking.svg \
+  qt/dailycrypto/res/img/ic-nav-cold-staking-active.svg \
+  qt/dailycrypto/res/img/ic-nav-dashboard-active.svg \
+  qt/dailycrypto/res/img/ic-wallet-status-locked.svg \
+  qt/dailycrypto/res/img/bg-splash.svg \
+  qt/dailycrypto/res/img/bg-splash.png \
+  qt/dailycrypto/res/img/ic-check-mint.svg \
+  qt/dailycrypto/res/img/ic-nav-dashboard-hover.svg \
+  qt/dailycrypto/res/img/ic-wallet-status-staking.svg \
+  qt/dailycrypto/res/img/ic-check-peers-off.svg \
+  qt/dailycrypto/res/img/ic-nav-dashboard.svg \
+  qt/dailycrypto/res/img/ic-wallet-status-unlocked.svg \
+  qt/dailycrypto/res/img/ic-check-peers.svg \
+  qt/dailycrypto/res/img/ic-nav-master-active.svg \
+  qt/dailycrypto/res/img/ic-watch-password-white.svg \
+  qt/dailycrypto/res/img/bg-welcome-container.jpg \
+  qt/dailycrypto/res/img/bg-welcome-container.png \
+  qt/dailycrypto/res/img/bg-welcome-container.svg \
+  qt/dailycrypto/res/img/bg-welcome-container@2x.png \
+  qt/dailycrypto/res/img/bg-welcome-container@3x.png \
+  qt/dailycrypto/res/img/ic-check-staking-off.svg \
+  qt/dailycrypto/res/img/ic-nav-master-hover.svg \
+  qt/dailycrypto/res/img/ic-watch-password.svg \
+  qt/dailycrypto/res/img/bg-welcome.jpg \
+  qt/dailycrypto/res/img/bg-welcome.svg \
+  qt/dailycrypto/res/img/bg-welcome@2x.jpg \
+  qt/dailycrypto/res/img/bg-welcome@3x.jpg \
+  qt/dailycrypto/res/img/bg-welcome.png \
+  qt/dailycrypto/res/img/ic-check-staking.svg \
+  qt/dailycrypto/res/img/ic-nav-master.svg \
+  qt/dailycrypto/res/img/img-dashboard-banner.jpg \
+  qt/dailycrypto/res/img/btn-radio-active.svg \
+  qt/dailycrypto/res/img/ic-check-sync-off.svg \
+  qt/dailycrypto/res/img/ic-nav-privacy-active.svg \
+  qt/dailycrypto/res/img/img-empty-contacts.svg \
+  qt/dailycrypto/res/img/btn-radio-off.svg \
+  qt/dailycrypto/res/img/ic-check-sync.png \
+  qt/dailycrypto/res/img/ic-nav-privacy-hover.svg \
+  qt/dailycrypto/res/img/img-empty-dark-contacts.svg \
+  qt/dailycrypto/res/img/ic-contact-arrow-down.svg \
+  qt/dailycrypto/res/img/ic-contact-arrow-down-white.svg \
+  qt/dailycrypto/res/img/ic-check-sync.svg \
+  qt/dailycrypto/res/img/ic-check-faq.svg \
+  qt/dailycrypto/res/img/ic-nav-privacy.svg \
+  qt/dailycrypto/res/img/img-empty-dark-error.svg \
+  qt/dailycrypto/res/img/ic-add-label.svg \
+  qt/dailycrypto/res/img/ic-pending.svg \
+  qt/dailycrypto/res/img/ic-check-theme-dark.svg \
+  qt/dailycrypto/res/img/ic-nav-receive-active.svg \
+  qt/dailycrypto/res/img/img-empty-dark-masternode.svg \
+  qt/dailycrypto/res/img/ic-add-liliac.svg \
+  qt/dailycrypto/res/img/ic-check-theme-light.svg \
+  qt/dailycrypto/res/img/ic-nav-receive-hover.svg \
+  qt/dailycrypto/res/img/img-empty-dark-multisend.svg \
+  qt/dailycrypto/res/img/ic-add-purple.svg \
+  qt/dailycrypto/res/img/ic-check-white.svg \
+  qt/dailycrypto/res/img/ic-nav-receive.svg \
+  qt/dailycrypto/res/img/img-empty-dark-peers.svg \
+  qt/dailycrypto/res/img/ic-add.svg \
+  qt/dailycrypto/res/img/ic-check.svg \
+  qt/dailycrypto/res/img/ic-nav-send-active.svg \
+  qt/dailycrypto/res/img/img-empty-dark-staking-off.svg \
+  qt/dailycrypto/res/img/img-empty-dark-staking-on.svg \
+  qt/dailycrypto/res/img/ic-address-book-grey.svg \
+  qt/dailycrypto/res/img/ic-chevron-left.svg \
+  qt/dailycrypto/res/img/ic-nav-send-hover.svg \
+  qt/dailycrypto/res/img/img-empty-dark-transactions.svg \
+  qt/dailycrypto/res/img/ic-address-book-white.svg \
+  qt/dailycrypto/res/img/ic-chevron-right.svg \
+  qt/dailycrypto/res/img/ic-nav-send.svg \
+  qt/dailycrypto/res/img/img-empty-error.svg \
+  qt/dailycrypto/res/img/ic-address-book.svg \
+  qt/dailycrypto/res/img/ic-clear-liliac.svg \
+  qt/dailycrypto/res/img/ic-nav-settings-active.svg \
+  qt/dailycrypto/res/img/img-empty-masternode.svg \
+  qt/dailycrypto/res/img/ic-address-send-white.svg \
+  qt/dailycrypto/res/img/ic-clear-purple.svg \
+  qt/dailycrypto/res/img/ic-nav-settings-hover.svg \
+  qt/dailycrypto/res/img/img-empty-multisend.svg \
+  qt/dailycrypto/res/img/ic-address-send.svg \
+  qt/dailycrypto/res/img/ic-close-white.svg \
+  qt/dailycrypto/res/img/ic-nav-settings.svg \
+  qt/dailycrypto/res/img/img-empty-peers.svg \
+  qt/dailycrypto/res/img/img-empty-privacy.svg \
+  qt/dailycrypto/res/img/img-empty-privacy-dark.svg \
+  qt/dailycrypto/res/img/ic-arrow-drop-down-white.svg \
+  qt/dailycrypto/res/img/ic-close.svg \
+  qt/dailycrypto/res/img/ic-radio-liliac-on.svg \
+  qt/dailycrypto/res/img/img-empty-staking-off.svg \
+  qt/dailycrypto/res/img/ic-arrow-drop-down.svg \
+  qt/dailycrypto/res/img/ic-coin-piv.svg \
+  qt/dailycrypto/res/img/ic-receive-off.svg \
+  qt/dailycrypto/res/img/img-empty-staking-on.svg \
+  qt/dailycrypto/res/img/ic-arrow-drop-up-white.svg \
+  qt/dailycrypto/res/img/ic-coin-zpiv.png \
+  qt/dailycrypto/res/img/ic-receive-on.svg \
+  qt/dailycrypto/res/img/img-empty-transactions.svg \
+  qt/dailycrypto/res/img/ic-arrow-drop-up.svg \
+  qt/dailycrypto/res/img/ic-coin-zpiv.svg \
+  qt/dailycrypto/res/img/ic-received.svg \
+  qt/dailycrypto/res/img/img-logo-dailycrypto.png \
+  qt/dailycrypto/res/img/ic-arrow-drop-white-down.svg \
+  qt/dailycrypto/res/img/ic-combo-box.svg \
+  qt/dailycrypto/res/img/ic-send.svg \
+  qt/dailycrypto/res/img/img-logo-dailycrypto@2x.png \
+  qt/dailycrypto/res/img/ic-arrow-purple-down.svg \
+  qt/dailycrypto/res/img/ic-connect.svg \
+  qt/dailycrypto/res/img/ic-submenu-lock.svg \
+  qt/dailycrypto/res/img/img-logo-dailycrypto@3x.png \
+  qt/dailycrypto/res/img/img-logo-dailycrypto.svg \
+  qt/dailycrypto/res/img/ic-arrow-right-white.svg \
+  qt/dailycrypto/res/img/ic-arrow-left-white.svg \
+  qt/dailycrypto/res/img/ic-arrow-left.svg \
+  qt/dailycrypto/res/img/ic-copy-liliac.svg \
+  qt/dailycrypto/res/img/ic-submenu-staking.svg \
+  qt/dailycrypto/res/img/img-nav-logo-dailycrypto.png \
+  qt/dailycrypto/res/img/ic-arrow-right.svg \
+  qt/dailycrypto/res/img/ic-copy.svg \
+  qt/dailycrypto/res/img/ic-copy-big.svg \
+  qt/dailycrypto/res/img/ic-copy-big-white.svg \
+  qt/dailycrypto/res/img/ic-submenu-unlock.svg \
+  qt/dailycrypto/res/img/img-nav-logo.png \
+  qt/dailycrypto/res/img/ic-arrow-white-left.svg \
+  qt/dailycrypto/res/img/ic-exit.svg \
+  qt/dailycrypto/res/img/ic-switch-liliac-on.svg \
+  qt/dailycrypto/res/img/img-nav-logo.svg \
+  qt/dailycrypto/res/img/ic-arrow-white-right.svg \
+  qt/dailycrypto/res/img/ic-expand.svg \
+  qt/dailycrypto/res/img/ic-switch-off.svg \
+  qt/dailycrypto/res/img/img-qr-test-big.png \
+  qt/dailycrypto/res/img/ic-check-active.svg \
+  qt/dailycrypto/res/img/ic-folder.svg \
+  qt/dailycrypto/res/img/ic-switch-on.svg \
+  qt/dailycrypto/res/img/img-qr-test.png \
+  qt/dailycrypto/res/img/ic-check-box.svg \
+  qt/dailycrypto/res/img/ic-check-box-dark-active.svg \
+  qt/dailycrypto/res/img/ic-check-box-indeterminate.svg \
+  qt/dailycrypto/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/dailycrypto/res/img/ic-label-liliac.svg \
+  qt/dailycrypto/res/img/ic-transaction-warning.svg \
+  qt/dailycrypto/res/img/ic-transaction-mint.svg \
+  qt/dailycrypto/res/img/ic-transaction-mint-inactive.svg \
+  qt/dailycrypto/res/img/ic-check-cold-staking.svg \
+  qt/dailycrypto/res/img/ic-check-cold-staking-off.svg \
+  qt/dailycrypto/res/img/ic-check-cold-staking-enabled.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-cs-contract.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-cs-contract-inactive.svg \
+  qt/dailycrypto/res/img/img-qr.svg \
+  qt/dailycrypto/res/img/ic-check-connect-off.svg \
+  qt/dailycrypto/res/img/ic-label.svg \
+  qt/dailycrypto/res/img/ic-transaction-received.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-received.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-warning.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-mint.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-mint-inactive.svg \
+  qt/dailycrypto/res/img/ic-transaction-received-inactive.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-received-inactive.svg \
+  qt/dailycrypto/res/img/img-welcome-step1.png \
+  qt/dailycrypto/res/img/ic-check-connect.svg \
+  qt/dailycrypto/res/img/ic-menu-hover.svg \
+  qt/dailycrypto/res/img/ic-transaction-sent.svg \
+  qt/dailycrypto/res/img/ic-transaction-sent-inactive.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-sent.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-sent-inactive.svg \
+  qt/dailycrypto/res/img/img-welcome-step2.png \
+  qt/dailycrypto/res/img/ic-check-dark.svg \
+  qt/dailycrypto/res/img/ic-mint.svg \
+  qt/dailycrypto/res/img/ic-transaction-staked.svg \
+  qt/dailycrypto/res/img/ic-transaction-staked-inactive.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-staked.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-staked-inactive.svg \
+  qt/dailycrypto/res/img/img-welcome-step3.png \
+  qt/dailycrypto/res/img/ic-check-liliac-on.svg \
+  qt/dailycrypto/res/img/ic-nav-address-active.svg \
+  qt/dailycrypto/res/img/ic-unlock-staking.svg \
+  qt/dailycrypto/res/img/img-welcome-step4.png \
+  qt/dailycrypto/res/img/ic-check-locked-off.svg \
+  qt/dailycrypto/res/img/ic-nav-address-hover.svg \
+  qt/dailycrypto/res/img/ic-update-liliac.svg \
+  qt/dailycrypto/res/img/ic-arrow-drop-down-purple.svg \
+  qt/dailycrypto/res/img/ic-arrow-drop-up-purple.svg \
+  qt/dailycrypto/res/img/ic-check-liliac-indeterminate.svg \
+  qt/dailycrypto/res/img/ic-check-box-liliac-indeterminate.svg \
+  qt/dailycrypto/res/img/ic-transaction-stake-delegated.svg \
+  qt/dailycrypto/res/img/ic-transaction-stake-delegated-inactive.svg \
+  qt/dailycrypto/res/img/ic-transaction-stake-hot.svg \
+  qt/dailycrypto/res/img/ic-transaction-stake-hot-inactive.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-stake-hot.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-stake-hot-inactive.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-stake-delegated.svg \
+  qt/dailycrypto/res/img/dark/ic-transaction-stake-delegated-inactive.svg \
+  qt/dailycrypto/res/img/ic-transaction-cs-contract.svg \
+  qt/dailycrypto/res/img/ic-transaction-cs-contract-inactive.svg \
+  qt/dailycrypto/res/img/ic-check-box-indeterminate.svg \
+  qt/dailycrypto/res/img/ani-loading-dark.gif \
+  qt/dailycrypto/res/img/ani-loading.gif
+
+
+
+BITCOIN_QT_BASE_CPP = \
+  qt/bantablemodel.cpp \
+  qt/bitcoinaddressvalidator.cpp \
+  qt/bitcoinamountfield.cpp \
+  qt/dailycrypto/dailycryptogui.cpp \
+  qt/bitcoinunits.cpp \
+  qt/blockexplorer.cpp \
+  qt/clientmodel.cpp \
+  qt/csvmodelwriter.cpp \
+  qt/guiutil.cpp \
+  qt/intro.cpp \
+  qt/networkstyle.cpp \
+  qt/notificator.cpp \
+  qt/optionsdialog.cpp \
+  qt/optionsmodel.cpp \
+  qt/peertablemodel.cpp \
+  qt/platformstyle.cpp \
+  qt/qvalidatedlineedit.cpp \
+  qt/qvaluecombobox.cpp \
+  qt/rpcconsole.cpp \
+  qt/splashscreen.cpp \
+  qt/trafficgraphwidget.cpp \
+  qt/utilitydialog.cpp
+
+BITCOIN_QT_WINDOWS_CPP = qt/winshutdownmonitor.cpp
+
+BITCOIN_QT_WALLET_CPP = \
+  qt/addressbookpage.cpp \
+  qt/addresstablemodel.cpp \
+  qt/askpassphrasedialog.cpp \
+  qt/blockexplorer.cpp \
+  qt/coincontroldialog.cpp \
+  qt/coincontroltreewidget.cpp \
+  qt/editaddressdialog.cpp \
+  qt/governancepage.cpp \
+  qt/openuridialog.cpp \
+  qt/paymentrequestplus.cpp \
+  qt/paymentserver.cpp \
+  qt/proposalframe.cpp \
+  qt/recentrequeststablemodel.cpp \
+  qt/transactiondesc.cpp \
+  qt/transactionfilterproxy.cpp \
+  qt/transactionrecord.cpp \
+  qt/transactiontablemodel.cpp \
+  qt/walletmodel.cpp \
+  qt/walletmodeltransaction.cpp \
+  qt/dailycrypto/loadingdialog.cpp \
+  qt/zpivcontroldialog.cpp \
+  qt/dailycrypto/pwidget.cpp \
+  qt/dailycrypto/guitransactionsutils.cpp \
+  qt/dailycrypto/snackbar.cpp \
+  qt/dailycrypto/navmenuwidget.cpp \
+  qt/dailycrypto/lockunlock.cpp \
+  qt/dailycrypto/receivedialog.cpp \
+  qt/dailycrypto/furabstractlistitemdelegate.cpp \
+  qt/dailycrypto/txviewholder.cpp \
+  qt/dailycrypto/qtutils.cpp \
+  qt/dailycrypto/expandablebutton.cpp \
+  qt/dailycrypto/walletpassworddialog.cpp \
+  qt/dailycrypto/topbar.cpp \
+  qt/dailycrypto/txrow.cpp \
+  qt/dailycrypto/addressholder.cpp \
+  qt/dailycrypto/addressfilterproxymodel.cpp \
+  qt/dailycrypto/dashboardwidget.cpp \
+  qt/dailycrypto/coincontrolpivwidget.cpp \
+  qt/dailycrypto/addresslabelrow.cpp \
+  qt/dailycrypto/contactdropdownrow.cpp \
+  qt/dailycrypto/contactsdropdown.cpp \
+  qt/dailycrypto/optionbutton.cpp \
+  qt/dailycrypto/mninfodialog.cpp \
+  qt/dailycrypto/coldstakingmodel.cpp \
+  qt/dailycrypto/mnmodel.cpp \
+  qt/dailycrypto/masternodewizarddialog.cpp \
+  qt/dailycrypto/mnrow.cpp \
+  qt/dailycrypto/masternodeswidget.cpp \
+  qt/dailycrypto/myaddressrow.cpp \
+  qt/dailycrypto/csrow.cpp \
+  qt/dailycrypto/sendchangeaddressdialog.cpp \
+  qt/dailycrypto/sendconfirmdialog.cpp \
+  qt/dailycrypto/sendcustomfeedialog.cpp \
+  qt/dailycrypto/sendchangeaddressdialog.cpp \
+  qt/dailycrypto/sendmultirow.cpp \
+  qt/dailycrypto/send.cpp \
+  qt/dailycrypto/addnewaddressdialog.cpp \
+  qt/dailycrypto/addnewcontactdialog.cpp \
+  qt/dailycrypto/requestdialog.cpp \
+  qt/dailycrypto/receivewidget.cpp \
+  qt/dailycrypto/tooltipmenu.cpp \
+  qt/dailycrypto/addresseswidget.cpp \
+  qt/dailycrypto/defaultdialog.cpp \
+  qt/dailycrypto/denomgenerationdialog.cpp \
+  qt/dailycrypto/privacywidget.cpp \
+  qt/dailycrypto/coldstakingwidget.cpp \
+  qt/dailycrypto/settings/settingsbackupwallet.cpp \
+  qt/dailycrypto/settings/settingsbittoolwidget.cpp \
+  qt/dailycrypto/settings/settingsconsolewidget.cpp \
+  qt/dailycrypto/settings/settingsdisplayoptionswidget.cpp \
+  qt/dailycrypto/settings/settingsfaqwidget.cpp \
+  qt/dailycrypto/settings/settingsinformationwidget.cpp \
+  qt/dailycrypto/settings/settingsmainoptionswidget.cpp \
+  qt/dailycrypto/settings/settingsmultisenddialog.cpp \
+  qt/dailycrypto/settings/settingsmultisendwidget.cpp \
+  qt/dailycrypto/settings/settingssignmessagewidgets.cpp \
+  qt/dailycrypto/settings/settingswalletoptionswidget.cpp \
+  qt/dailycrypto/settings/settingswalletrepairwidget.cpp \
+  qt/dailycrypto/settings/settingswidget.cpp \
+  qt/dailycrypto/welcomecontentwidget.cpp \
+  qt/dailycrypto/splash.cpp
+
+
+BITCOIN_QT_CPP = $(BITCOIN_QT_BASE_CPP)
+if TARGET_WINDOWS
+BITCOIN_QT_CPP += $(BITCOIN_QT_WINDOWS_CPP)
+endif
+if ENABLE_WALLET
+BITCOIN_QT_CPP += $(BITCOIN_QT_WALLET_CPP)
+endif
+
+RES_IMAGES = \
+  qt/res/images/about.png \
+  qt/res/images/splash.png \
+  qt/res/images/splash_testnet.png \
+  qt/res/images/splash_regtest.png \
+  qt/res/images/dailycrypto_logo_horizontal.png \
+  qt/res/images/downArrow_dark.png \
+  qt/res/images/downArrow_small_dark.png \
+  qt/res/images/downArrow_small.png \
+  qt/res/images/upArrow_small_dark.png \
+  qt/res/images/upArrow_small.png \
+  qt/res/images/leftArrow_small_dark.png \
+  qt/res/images/rightArrow_small_dark.png \
+  qt/res/images/qtreeview_selected.png
+
+RES_CSS = \
+  qt/res/css/default.css \
+  qt/dailycrypto/res/css/style_dark.css \
+  qt/dailycrypto/res/css/style_light.css
+
+RES_MOVIES = $(wildcard $(srcdir)/qt/res/movies/spinner-*.png)
+
+BITCOIN_RC = qt/res/dailycrypto-qt-res.rc
+
+BITCOIN_QT_INCLUDES = -I$(builddir)/qt -I$(srcdir)/qt -I$(srcdir)/qt/forms \
+  -I$(builddir)/qt/forms
+
+qt_libbitcoinqt_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(QT_DBUS_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_libbitcoinqt_a_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+qt_libbitcoinqt_a_OBJCXXFLAGS = $(AM_OBJCXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_libbitcoinqt_a_SOURCES = $(BITCOIN_QT_CPP) $(BITCOIN_QT_H) $(QT_FORMS_UI) \
+  $(QT_QRC) $(QT_QRC_LOCALE) $(QT_TS) $(PROTOBUF_PROTO) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES)
+
+nodist_qt_libbitcoinqt_a_SOURCES = $(QT_MOC_CPP) $(QT_MOC) $(PROTOBUF_CC) \
+  $(PROTOBUF_H) $(QT_QRC_CPP) $(QT_QRC_LOCALE_CPP)
+
+# forms/foo.h -> forms/ui_foo.h
+QT_FORMS_H=$(join $(dir $(QT_FORMS_UI)),$(addprefix ui_, $(notdir $(QT_FORMS_UI:.ui=.h))))
+
+# Most files will depend on the forms and moc files as includes. Generate them
+# before anything else.
+$(QT_MOC): $(QT_FORMS_H)
+$(qt_libbitcoinqt_a_OBJECTS) $(qt_dailycrypto_qt_OBJECTS) : | $(QT_MOC)
+
+#Generating these with a half-written protobuf header leads to wacky results.
+#This makes sure it's done.
+$(QT_MOC): $(PROTOBUF_H)
+$(QT_MOC_CPP): $(PROTOBUF_H)
+
+# dailycrypto-qt binary #
+qt_dailycrypto_qt_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(BITCOIN_QT_INCLUDES) \
+  $(QT_INCLUDES) $(PROTOBUF_CFLAGS) $(QR_CFLAGS) $(SVG_CFLAGS) $(CHARTS_CFLAGS)
+qt_dailycrypto_qt_CXXFLAGS = $(AM_CXXFLAGS) $(QT_PIE_FLAGS)
+
+qt_dailycrypto_qt_SOURCES = qt/dailycrypto.cpp
+if TARGET_DARWIN
+  qt_dailycrypto_qt_SOURCES += $(BITCOIN_MM)
+endif
+if TARGET_WINDOWS
+  qt_dailycrypto_qt_SOURCES += $(BITCOIN_RC)
+endif
+qt_dailycrypto_qt_LDADD = qt/libbitcoinqt.a $(LIBBITCOIN_SERVER)
+if ENABLE_WALLET
+qt_dailycrypto_qt_LDADD += $(LIBBITCOIN_UTIL) $(LIBBITCOIN_WALLET)
+endif
+if ENABLE_ZMQ
+qt_dailycrypto_qt_LDADD += $(LIBBITCOIN_ZMQ) $(ZMQ_LIBS)
+endif
+qt_dailycrypto_qt_LDADD += $(LIBBITCOIN_CLI) $(LIBBITCOIN_COMMON) $(LIBBITCOIN_UTIL) $(LIBBITCOIN_CRYPTO) $(LIBUNIVALUE) $(LIBBITCOIN_ZEROCOIN) $(LIBLEVELDB) $(LIBLEVELDB_SSE42) $(LIBMEMENV) \
+  $(BOOST_LIBS) $(QT_LIBS) $(QT_DBUS_LIBS) $(QR_LIBS) $(PROTOBUF_LIBS) $(SVG_LIBS) $(CHARTS_LIBS) $(BDB_LIBS) $(SSL_LIBS) $(CRYPTO_LIBS) $(MINIUPNPC_LIBS) $(LIBSECP256K1) \
+  $(EVENT_PTHREADS_LIBS) $(EVENT_LIBS)
+qt_dailycrypto_qt_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(QT_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
+qt_dailycrypto_qt_LIBTOOLFLAGS = $(AM_LIBTOOLFLAGS) --tag CXX
+
+#locale/foo.ts -> locale/foo.qm
+QT_QM=$(QT_TS:.ts=.qm)
+
+SECONDARY: $(QT_QM)
+
+$(srcdir)/qt/dailycryptostrings.cpp: $(libbitcoin_server_a_SOURCES) $(libbitcoin_wallet_a_SOURCES) $(libbitcoin_common_a_SOURCES) $(libbitcoin_zmq_a_SOURCES) $(libbitcoin_util_a_SOURCES)
+	@test -n $(XGETTEXT) || echo "xgettext is required for updating translations"
+	$(AM_V_GEN) cd $(srcdir); XGETTEXT=$(XGETTEXT) PACKAGE_NAME="$(PACKAGE_NAME)" $(PYTHON) ../share/qt/extract_strings_qt.py $^
+
+translate: $(srcdir)/qt/dailycryptostrings.cpp $(QT_FORMS_UI) $(QT_FORMS_UI) $(BITCOIN_QT_BASE_CPP) qt/dailycrypto.cpp $(BITCOIN_QT_WINDOWS_CPP) $(BITCOIN_QT_WALLET_CPP) $(BITCOIN_QT_H) $(BITCOIN_MM)
+	@test -n $(LUPDATE) || echo "lupdate is required for updating translations"
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LUPDATE) $^ -locations relative -no-obsolete -ts $(srcdir)/qt/locale/dailycrypto_en.ts
+
+$(QT_QRC_LOCALE_CPP): $(QT_QRC_LOCALE) $(QT_QM)
+	@test -f $(RCC)
+	@cp -f $< $(@D)/temp_$(<F)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name dailycrypto_locale $(@D)/temp_$(<F) | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+	@rm $(@D)/temp_$(<F)
+
+$(QT_QRC_CPP): $(QT_QRC) $(QT_FORMS_H) $(RES_ICONS) $(RES_IMAGES) $(RES_CSS) $(RES_MOVIES) $(PROTOBUF_H)
+	@test -f $(RCC)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(RCC) -name dailycrypto $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+CLEAN_QT = $(nodist_qt_libbitcoinqt_a_SOURCES) $(QT_QM) $(QT_FORMS_H) qt/*.gcda qt/*.gcno qt/temp_dailycrypto_locale.qrc
+
+CLEANFILES += $(CLEAN_QT)
+
+dailycrypto_qt_clean: FORCE
+	rm -f $(CLEAN_QT) $(qt_libbitcoinqt_a_OBJECTS) $(qt_dailycrypto_qt_OBJECTS) qt/dailycrypto-qt$(EXEEXT) $(LIBBITCOINQT)
+
+dailycrypto_qt : qt/dailycrypto-qt$(EXEEXT)
+
+ui_%.h: %.ui
+	@test -f $(UIC)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(UIC) -o $@ $< || (echo "Error creating $@"; false)
+
+%.moc: %.cpp
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+moc_%.cpp: %.h
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(MOC) $(DEFAULT_INCLUDES) $(QT_INCLUDES) $(MOC_DEFS) $< | \
+	  $(SED) -e '/^\*\*.*Created:/d' -e '/^\*\*.*by:/d' > $@
+
+%.qm: %.ts
+	@test -f $(LRELEASE)
+	@$(MKDIR_P) $(@D)
+	$(AM_V_GEN) QT_SELECT=$(QT_SELECT) $(LRELEASE) -silent $< -qm $@
