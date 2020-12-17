@@ -119,7 +119,7 @@ bool AppInit(int argc, char* argv[])
 #ifndef WIN32
         fDaemon = GetBoolArg("-daemon", false);
         if (fDaemon) {
-            fprintf(stdout, "BlockidCoin server starting\n");
+            fprintf(stdout, "DailyCryptoGiveaways server starting\n");
 
             // Daemonize
             pid_t pid = fork();
